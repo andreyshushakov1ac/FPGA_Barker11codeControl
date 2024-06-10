@@ -1,0 +1,29 @@
+module shim (in0,in1,clk,out); //два входа на 
+	input[3:0] in0, in1, in2, in3;
+	input clk;
+
+	output out;
+	
+	reg out;
+	
+	reg[4:0] counter;
+
+	always@(posedge clk)
+	begin
+		if((counter<=in0 || in0==4'b1111) && in0!=4'b0000 && counter<=5'b01111)
+			begin
+				out <= 1'b0;
+			end
+		
+		else if(((counter-5'b01111)<=in1 || in1==4'b1111) && in1!=4'b0000 && counter<=5'b11111 && counter>5'b01111)
+			begin
+				out <= 1'b1;
+			end
+		else
+			begin
+				out <= 1'b0;
+			end
+			counter<=counter+5'b1;
+	end
+
+endmodule 
